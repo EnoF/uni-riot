@@ -1,9 +1,9 @@
 import express from 'express'
 import riot from 'riot'
-import baseTag from './tags/base-tag.tag'
+import baseTag from './tags/pages/base-page.tag'
 import homePage from './tags/pages/home-page.tag'
-import mainMenu from './tags/main-menu.tag'
-import menuLink from './tags/menu-link.tag'
+import mainMenu from './tags/menu/main-menu.tag'
+import menuLink from './tags/menu/menu-link.tag'
 
 const app = express()
 const PORT = 80
