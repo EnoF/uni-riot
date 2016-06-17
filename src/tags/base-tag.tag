@@ -3,6 +3,6 @@
 
   <main-menu></main-menu>
   <script type="babel">
-    this.title = 'Hello World!'
+    this.title = this.opts.page 
   </script>
 </base-tag>

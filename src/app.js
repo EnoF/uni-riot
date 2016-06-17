@@ -8,7 +8,13 @@ const app = express()
 const PORT = 80
 
 app.get('/', (req, res) => {
-  res.send(riot.render(baseTag))
+  res.redirect('/home');
+})
+
+app.get('/:page', (req, res) => {
+  res.send(riot.render(baseTag, {
+    page: req.params.page
+  }))
 })
 
 app.listen(PORT, () => console.log(`Server has started under port: ${PORT}`))
