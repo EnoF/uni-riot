@@ -1,4 +1,4 @@
-<base-tag>
+<base-page>
   <h1>{ title }</h1>
 
   <article class="content">
@@ -9,4 +9,4 @@
   <script type="babel">
     this.title = this.opts.page
   </script>
-</base-tag>
+</base-page>

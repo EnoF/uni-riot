@@ -4,6 +4,8 @@
   "description": "Universial Javascript with riotjs",
   "main": "index.js",
   "scripts": {
+    "compile": "riot ./src/tags .tmp/bundle.js",
+    "start": "npm run compile && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

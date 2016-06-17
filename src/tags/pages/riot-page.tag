@@ -1,5 +1,5 @@
 <riot-page>
-  <base-tag page="riot">
+  <base-page page="riot">
     <p>About RiotJS</p>
-  </base-tag>
+  </base-page>
 </riot-page>

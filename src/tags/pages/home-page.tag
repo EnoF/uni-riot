@@ -1,5 +1,5 @@
 <home-page>
-  <base-tag page="home">
+  <base-page page="home">
     <p>Hello world, how are you?</p>
-  </base-tag>
+  </base-page>
 </home-page>
