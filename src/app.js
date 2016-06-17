@@ -12,9 +12,7 @@ tagLoader(`${__dirname}/tags`)
     })
 
     app.get('/:page', (req, res) => {
-      res.send(riot.render(tags['base-page.tag'], {
-        page: req.params.page
-      }))
+      res.send(riot.render(tags[`${req.params.page}-page.tag`]))
     })
 
     app.listen(PORT, () => console.log(`Server has started under port: ${PORT}`))
