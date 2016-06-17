@@ -1,9 +1,3 @@
-const express = require('express')
+require('babel-register')
 
-const app = express()
-
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
-
-app.listen(80)
+require('./src/app')
