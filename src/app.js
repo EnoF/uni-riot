@@ -1,21 +1,21 @@
 import express from 'express'
 import riot from 'riot'
-import baseTag from './tags/pages/base-page.tag'
-import homePage from './tags/pages/home-page.tag'
-import mainMenu from './tags/menu/main-menu.tag'
-import menuLink from './tags/menu/menu-link.tag'
+import tagLoader from './tag-loader'
 
 const app = express()
 const PORT = 80
 
-app.get('/', (req, res) => {
-  res.send(riot.render(homePage))
-})
+tagLoader(`${__dirname}/tags`)
+  .then(tags => {
+    app.get('/', (req, res) => {
+      res.send(riot.render(tags['home-page.tag']))
+    })
 
-app.get('/:page', (req, res) => {
-  res.send(riot.render(baseTag, {
-    page: req.params.page
-  }))
-})
+    app.get('/:page', (req, res) => {
+      res.send(riot.render(tags['base-page.tag'], {
+        page: req.params.page
+      }))
+    })
 
-app.listen(PORT, () => console.log(`Server has started under port: ${PORT}`))
+    app.listen(PORT, () => console.log(`Server has started under port: ${PORT}`))
+  })
