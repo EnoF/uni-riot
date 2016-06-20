@@ -12,6 +12,7 @@ function inject(content) {
 }
 
 app.use(express.static(`${__dirname}/../.tmp`))
+app.use(express.static(`${__dirname}/../node_modules/riot`))
 
 tagLoader(`${__dirname}/tags`)
   .then(tags => {

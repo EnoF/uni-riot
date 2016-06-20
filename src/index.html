@@ -4,7 +4,12 @@
   </head>
   <body>
     {content}
+    <script src="riot.js"
+            type="text/javascript"></script>
     <script src="bundle.js"
             type="text/javascript"></script>
+    <script type="text/javascript">
+      riot.mount('*')
+    </script>
   </body>
 </html>
