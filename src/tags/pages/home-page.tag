@@ -1,5 +1,3 @@
 <home-page>
-  <base-page page="home">
-    <p>Hello world, how are you?</p>
-  </base-page>
+  <p>Hello world, how are you?</p>
 </home-page>

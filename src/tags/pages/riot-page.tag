@@ -1,5 +1,3 @@
 <riot-page>
-  <base-page page="riot">
-    <p>About RiotJS</p>
-  </base-page>
+  <p>About RiotJS</p>
 </riot-page>
