@@ -16,16 +16,13 @@ app.use(express.static(`${__dirname}/../node_modules/riot`))
 
 tagLoader(`${__dirname}/tags`)
   .then(tags => {
+    function resolveTag(req, res) {
+      const tag = tags[`${req.params.collection}-page.tag`]
+      return tag ? tag : res.redirect('/home')
+    }
 
-    app.get('/', (req, res) => {
-      const tag = riot.render(tags['home-page.tag'])
-      const html = inject(tag)
-      res.send(html)
-    })
-
-    app.get('/:page', (req, res) => {
-      if (req.params.page) return res.sendStatus(404)
-      const tag = riot.render(tags[`${req.params.page}-page.tag`])
+    app.get('/:collection*?/:details*?/:action*?', (req, res) => {
+      const tag = riot.render(resolveTag(req, res))
       const html = inject(tag)
       res.send(html)
     })
