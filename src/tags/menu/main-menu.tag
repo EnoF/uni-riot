@@ -9,10 +9,10 @@
 
   <script type="babel">
     this.links = [{
-      url: 'home',
+      url: '/home',
       label: 'home'
     }, {
-      url: 'riot',
+      url: '/riot',
       label: 'riot'
     }]
   </script>
