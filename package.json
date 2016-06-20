@@ -4,10 +4,10 @@
   "description": "Universial Javascript with riotjs",
   "main": "index.js",
   "scripts": {
-    "compile": "riot ./src/tags .tmp/bundle.js",
-    "start": "npm run compile && node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack"
+    "start": "npm run webpack && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 2",
+    "webpack": "webpack",
+    "dev": "webpack-dev-server --inline --hot"
   },
   "keywords": [
     "universal",
