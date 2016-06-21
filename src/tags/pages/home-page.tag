@@ -8,7 +8,7 @@
     </label>
     <button type="submit"
             name="event"
-            value="answer.who-are-you">
+            value="save">
       Hi!
     </button>
   </form>

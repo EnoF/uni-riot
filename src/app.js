@@ -4,6 +4,8 @@ import riot from 'riot'
 import fs from 'fs'
 import tagLoader from './tag-loader'
 import async from './async'
+import user from './services/user'
+import stateResolver from './services/state-resolver'
 
 const app = express()
 const jsonParser = bodyParser.json()
@@ -41,9 +43,17 @@ function *startApp() {
       page: collection,
       event
     })
-    const html = inject(tag, collection)
-      .replace('<base-page>', `<base-page event="${event}">`)
-    res.send(html)
+    const state = {
+      page: collection
+    }
+    stateResolver.resolve(collection).onUpdate({
+      name: event,
+      details: req.body
+    }, state).then(newState => {
+      const html = inject(tag, collection)
+        .replace('<base-page>', `<base-page state='{ ${JSON.stringify(newState)} }'>`)
+      res.send(html)
+    })
   })
 
   app.listen(PORT, () => console.log(`Server has started under port: ${PORT}`))
