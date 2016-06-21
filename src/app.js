@@ -1,10 +1,13 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import riot from 'riot'
 import fs from 'fs'
 import tagLoader from './tag-loader'
 import async from './async'
 
 const app = express()
+const jsonParser = bodyParser.json()
+const formParser = bodyParser.urlencoded({ extended: false })
 const PORT = 80
 
 function inject(content, page) {
@@ -12,6 +15,8 @@ function inject(content, page) {
   return base.replace('{content}', content.toString()).replace('{page}', page)
 }
 
+app.use(jsonParser)
+app.use(formParser)
 app.use(express.static(`${__dirname}/../.tmp`))
 app.use(express.static(`${__dirname}/../node_modules/riot`))
 
@@ -37,6 +42,7 @@ function *startApp() {
       event
     })
     const html = inject(tag, collection)
+      .replace('<base-page>', `<base-page event="${event}">`)
     res.send(html)
   })
 

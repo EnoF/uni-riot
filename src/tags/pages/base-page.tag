@@ -8,10 +8,11 @@
 
   <main-menu></main-menu>
   <script type="babel">
-    const { riot, page } = this.opts
+    const { riot, page, event } = this.opts
 
     this.title = 'Home'
     this.state = {
+      event,
       page
     }
 

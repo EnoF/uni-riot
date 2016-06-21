@@ -1,3 +1,18 @@
 <home-page>
-  <p>Hello world, how are you?</p>
+  <form action="/home" method="post">
+    <label>
+      Hello world, who are you?
+      <input type="text"
+             value="{ name }"
+             name="name">
+    </label>
+    <button type="submit"
+            name="event"
+            value="answer.who-are-you">
+      Hi!
+    </button>
+  </form>
+  <script type="babel">
+    this.name = 'foo'
+  </script>
 </home-page>
