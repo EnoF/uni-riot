@@ -18,13 +18,25 @@ app.use(express.static(`${__dirname}/../node_modules/riot`))
 function *startApp() {
   const tags = yield tagLoader(`${__dirname}/tags`)
 
-  app.get('/:collection*?/:details*?/:action*?', (req, res) => {
-    const page = req.params.collection || 'home'
+  app.get('/:page*?/:details*?/:action*?', (req, res) => {
+    const { page = 'home' } = req.params
     const tag = riot.render(tags['base-page.tag'], {
-      riot: riot,
+      riot,
       page
     })
     const html = inject(tag, page)
+    res.send(html)
+  })
+
+  app.post('/:collection*?/:details*?/:action*?', (req, res) => {
+    const { collection, details, action } = req.params
+    const { event } = req.body
+    const tag = riot.render(tags['base-page.tag'], {
+      riot,
+      page: collection,
+      event
+    })
+    const html = inject(tag, collection)
     res.send(html)
   })
 
