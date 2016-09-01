@@ -7,33 +7,14 @@ export default function createState(initialState = getDefaultState()) {
   }
 }
 
-function setEvent(event) {
-  stateResolver(event, this.state).then(() => this.update())
+export function setState(initialState, newState) {
+  if (!newState) return;
+  Object.keys(newState).forEach(prop => initialState[prop] = newState[prop])
 }
 
 function getDefaultState() {
   return {
-    name: 'world',
+    name: null,
     page: 'home',
   }
 }
-
-// export default class State {
-//   constructor(initialState = this.getDefaultState) {
-//     this.state = initialState
-//   }
-//
-//   get page() {
-//     return this.state.page
-//   }
-//
-//   set page(page) {
-//     this.state.page = page
-//   }
-//
-//   getDefaultState() {
-//     return {
-//       page: 'home'
-//     }
-//   }
-// }

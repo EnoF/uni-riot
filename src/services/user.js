@@ -1,26 +1,29 @@
 import stateResolver from './state-resolver'
 
-const PAGE = 'home'
+const SERVICE_NAME = 'user'
 const EVENT_SAVE = 'save'
 
 class User {
   constructor() {
-    stateResolver.registerService(PAGE, this)
+    stateResolver.registerService(SERVICE_NAME, this)
   }
 
-  onUpdate(event, state) {
-    switch (event.name) {
+  trigger(data, state) {
+    const { event } = data
+    switch (event) {
       case EVENT_SAVE:
-        return this.saveName(event, state)
+        return this.saveName(data, state)
+        break;
       default:
         return Promise.resolve()
     }
   }
 
-  saveName(event, state) {
+  saveName(data, state) {
     return Promise.resolve({
-      name: event.details.name
-    }).then(data => Promise.resolve({...state, name: data.name}))
+      name: data.name
+    }).then(data => state.name = data.name)
+      .then(() => state)
   }
 }
 

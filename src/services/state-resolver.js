@@ -4,12 +4,14 @@ class StateResolver {
     this.services = new Map()
   }
 
-  registerService(page, service) {
-    this.services.set(page, service)
+  registerService(serviceName, service) {
+    this.services.set(serviceName, service)
   }
 
-  resolve(page) {
-    return this.services.get(page)
+  resolve(data, state) {
+    const { service } = data
+    const instance = this.services.get(service)
+    return instance.trigger(data, state)
   }
 }
 
