@@ -8,12 +8,12 @@
 
   <main-menu></main-menu>
   <script type="babel">
-    const { riot, page } = this.opts
+    import { default as createState, setState } from '../../services/state'
+
+    const { riot, state } = this.opts
 
     this.title = 'Home'
-    this.state = {
-      page
-    }
+    setState(this.state, state)
 
     riot.route.base('/')
     riot.route('/*', page => {
