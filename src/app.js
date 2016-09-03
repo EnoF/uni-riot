@@ -48,8 +48,7 @@ function *startApp() {
     }
     stateResolver.resolve(req.body, state).then(state => {
       // Injecting riot into the state
-      const browserState = { ...state, riot }
-      riot.mixin(createState(state))
+      const browserState = { state, ...state, riot }
       const tag = riot.render(tags['base-page.tag'], browserState)
       const html = inject(tag, collection)
         .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
