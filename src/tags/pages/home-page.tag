@@ -33,7 +33,7 @@
         name: this.name.value
       }
 
-      stateResolver.resolve(data, this.state)
+      stateResolver.updateState(data, this.state)
         .then(state => this.update())
       event.preventDefault()
     }

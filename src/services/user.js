@@ -8,7 +8,7 @@ class User {
     stateResolver.registerService(SERVICE_NAME, this)
   }
 
-  trigger(data, state) {
+  updateState(data, state) {
     const { event } = data
     switch (event) {
       case EVENT_SAVE:

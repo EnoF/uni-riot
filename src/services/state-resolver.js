@@ -11,7 +11,7 @@ class StateResolver {
   resolve(data, state) {
     const { service } = data
     const instance = this.services.get(service)
-    return instance.trigger(data, state)
+    return instance.updateState(data, state)
   }
 }
 
