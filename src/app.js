@@ -31,10 +31,9 @@ function *startApp() {
   app.get('/:page*?/:details*?/:action*?', (req, res) => {
     const { page = 'home' } = req.params
     const state = { page }
-    riot.mixin(createState(state))
     const tag = riot.render(tags['base-page.tag'], {
       riot,
-      page
+      state
     })
     const html = inject(tag, page)
     res.send(html)
