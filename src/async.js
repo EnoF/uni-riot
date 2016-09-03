@@ -15,5 +15,5 @@ export default function async(instance, ...args) {
     }
     // Kick off the sequence
     handler.apply(this, args)
-  });
+  })
 }
