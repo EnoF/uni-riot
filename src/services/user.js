@@ -22,7 +22,7 @@ class User {
   saveName(data, state) {
     return Promise.resolve({
       name: data.name
-    }).then(data => state.name = data.name)
+    }).then(data => state.setState({ name: data.name }))
       .then(() => state)
   }
 }
