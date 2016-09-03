@@ -10,20 +10,20 @@
 
   <main-menu></main-menu>
   <script type="babel">
-    import { default as createState, setState } from '../../services/state'
+    import { default as createState, setState, State } from '../../services/state'
 
     const { riot, state } = this.opts
 
     this.title = 'Home'
-    this.state = this.opts.state
+    this.state = new State(this.opts.state)
 
     riot.route.base('/')
     riot.route('/*', page => {
-      this.state.page = page
+      this.state.setState({ page })
       this.update()
     })
     riot.route.start(true)
 
-    this.route = route => this.state.page == route
+    this.route = route => this.state.getState().page == route
   </script>
 </base-page>
