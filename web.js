@@ -9,7 +9,7 @@ requireAll(require.context('./src/tags', true, /\.tag$/))
 var riot = require('riot')
 var createState = require('./src/services/state').default
 
-riot.mixin(createState())
+// riot.mixin(createState())
 
 riot.mount('*', {
   riot: riot,

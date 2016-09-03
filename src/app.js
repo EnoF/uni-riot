@@ -36,6 +36,7 @@ function *startApp() {
       state
     })
     const html = inject(tag, page)
+      .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
     res.send(html)
   })
 

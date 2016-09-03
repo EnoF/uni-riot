@@ -21,6 +21,7 @@
   <script type="babel">
     import user from '../../services/user'
     import stateResolver from '../../services/state-resolver'
+    this.state = this.opts.state
     this.submit = event => {
       const data = {
         service: 'user',
