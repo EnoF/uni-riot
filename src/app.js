@@ -5,7 +5,7 @@ import fs from 'fs'
 import tagLoader from './tag-loader'
 import async from './async'
 import user from './services/user'
-import { default as createState, State } from './services/state'
+import { State } from './services/state'
 import stateResolver from './services/state-resolver'
 
 const app = express()
@@ -24,8 +24,6 @@ app.use(express.static(`${__dirname}/../.tmp`))
 app.use(express.static(`${__dirname}/../node_modules/riot`))
 
 function *startApp() {
-  riot.mixin(createState())
-
   const tags = yield tagLoader(`${__dirname}/tags`)
 
   app.get('/:page*?/:details*?/:action*?', (req, res) => {

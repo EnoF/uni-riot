@@ -10,7 +10,7 @@
 
   <main-menu></main-menu>
   <script type="babel">
-    import { default as createState, setState, State } from '../../services/state'
+    import { State } from '../../services/state'
 
     const { riot, state } = this.opts
 
