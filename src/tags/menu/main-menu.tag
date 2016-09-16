@@ -14,6 +14,9 @@
     }, {
       url: '/riot',
       label: 'riot'
+    }, {
+      url: '/todo',
+      label: 'todo'
     }]
   </script>
 </main-menu>

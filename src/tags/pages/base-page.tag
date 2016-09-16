@@ -6,6 +6,8 @@
                state={ state }></home-page>
     <riot-page show={ route('riot') }
                state={ state }></riot-page>
+    <todo-page show={ route('todo') }
+               state={ state }></todo-page>
   </article>
 
   <main-menu></main-menu>
@@ -13,6 +15,7 @@
     import { State } from '../../services/state'
 
     const { riot, state } = this.opts
+
 
     this.title = 'Home'
     this.state = new State(this.opts.state)
