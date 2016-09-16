@@ -1,20 +1,22 @@
 import stateResolver from './state-resolver'
 
-export default function createState(initialState = getDefaultState()) {
-  return {
-    state: initialState,
-    setEvent: event => setEvent(event)
+export class State {
+  constructor(initialState = this.getDefaultState()) {
+    this.state = initialState;
   }
-}
 
-export function setState(initialState, newState) {
-  if (!newState) return;
-  Object.keys(newState).forEach(prop => initialState[prop] = newState[prop])
-}
+  getState() {
+    return this.state;
+  }
 
-function getDefaultState() {
-  return {
-    name: null,
-    page: 'home',
+  setState(state) {
+    this.state = { ...this.state, ...state }
+  }
+
+  getDefaultState() {
+    return {
+      name: null,
+      page: 'home',
+    }
   }
 }

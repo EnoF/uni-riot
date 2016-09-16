@@ -8,7 +8,7 @@ class User {
     stateResolver.registerService(SERVICE_NAME, this)
   }
 
-  trigger(data, state) {
+  updateState(data, state) {
     const { event } = data
     switch (event) {
       case EVENT_SAVE:
@@ -22,7 +22,7 @@ class User {
   saveName(data, state) {
     return Promise.resolve({
       name: data.name
-    }).then(data => state.name = data.name)
+    }).then(data => state.setState({ name: data.name }))
       .then(() => state)
   }
 }

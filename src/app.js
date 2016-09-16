@@ -5,7 +5,7 @@ import fs from 'fs'
 import tagLoader from './tag-loader'
 import async from './async'
 import user from './services/user'
-import createState from './services/state'
+import { State } from './services/state'
 import stateResolver from './services/state-resolver'
 
 const app = express()
@@ -24,19 +24,17 @@ app.use(express.static(`${__dirname}/../.tmp`))
 app.use(express.static(`${__dirname}/../node_modules/riot`))
 
 function *startApp() {
-  riot.mixin(createState())
-
   const tags = yield tagLoader(`${__dirname}/tags`)
 
   app.get('/:page*?/:details*?/:action*?', (req, res) => {
     const { page = 'home' } = req.params
     const state = { page }
-    riot.mixin(createState(state))
     const tag = riot.render(tags['base-page.tag'], {
       riot,
-      page
+      state
     })
     const html = inject(tag, page)
+      .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
     res.send(html)
   })
 
@@ -44,16 +42,15 @@ function *startApp() {
     const { collection, details, action } = req.params
     const { event } = req.body
 
-    const state = {
+    const state = new State({
       page: collection
-    }
+    })
     stateResolver.resolve(req.body, state).then(state => {
       // Injecting riot into the state
-      const browserState = { ...state, riot }
-      riot.mixin(createState(state))
+      const browserState = { state: state.getState(), riot }
       const tag = riot.render(tags['base-page.tag'], browserState)
       const html = inject(tag, collection)
-        .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
+        .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state.getState())} }'>`)
       res.send(html)
     })
   })
