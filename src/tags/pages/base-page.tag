@@ -16,6 +16,7 @@
 
     const { riot, state } = this.opts
 
+
     this.title = 'Home'
     this.state = new State(this.opts.state)
 

@@ -5,6 +5,7 @@ import fs from 'fs'
 import tagLoader from './tag-loader'
 import async from './async'
 import user from './services/user'
+import todo from './services/todo'
 import { State } from './services/state'
 import stateResolver from './services/state-resolver'
 
@@ -28,14 +29,18 @@ function *startApp() {
 
   app.get('/:page*?/:details*?/:action*?', (req, res) => {
     const { page = 'home' } = req.params
-    const state = { page }
-    const tag = riot.render(tags['base-page.tag'], {
-      riot,
-      state
+    const state = new State({
+      page
     })
-    const html = inject(tag, page)
-      .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
-    res.send(html)
+    stateResolver.resolve({ service: 'todo', event: 'get-todo' }, state).then(state => {
+      const tag = riot.render(tags['base-page.tag'], {
+        riot,
+        state: state.state
+      })
+      const html = inject(tag, page)
+        .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state.state)} }'>`)
+      res.send(html)
+    })
   })
 
   app.post('/:collection*?/:details*?/:action*?', (req, res) => {

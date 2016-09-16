@@ -8,8 +8,18 @@
   </section>
 
   <script type="babel">
+    import Todo from '../../models/todo'
+
     this.todos = this.opts.todos
 
     this.newtodo = new Todo();
+
+    this.newtodo.on('submitted', () => {
+      const { title, description } = this.newtodo
+      this.todos.push(new Todo(title, description))
+      this.newtodo.reset()
+
+      this.update()
+    })
   </script>
 </todo-list>

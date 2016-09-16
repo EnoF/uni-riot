@@ -7,6 +7,11 @@ export default class Todo {
     this.description = description
   }
 
+  reset() {
+    this.title = null
+    this.description = null
+  }
+
   setTitle(title) {
     this.title = title
   }

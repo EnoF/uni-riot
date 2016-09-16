@@ -4,10 +4,8 @@
     import Todo from '../../models/todo'
 
     this.state = this.opts.state
-    this.todos = [
-      new Todo('One', 'Description One'),
-      new Todo('Two', 'Description Two'),
-      new Todo('Three', 'Description Three'),
-    ]
+    const { todoList = [] } = this.state.state
+    this.todos = todoList
+      .map(todo => new Todo(todo.title, todo.description))
   </script>
 </todo-page>
