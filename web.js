@@ -8,6 +8,6 @@ requireAll(require.context('./src/tags', true, /\.tag$/))
 
 var riot = require('riot')
 
-riot.mount('*', {
+riot.mount('base-page', {
   riot: riot
 })

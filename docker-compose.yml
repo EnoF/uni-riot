@@ -5,6 +5,9 @@ services:
     image: enof/uni-riot
     volumes:
       - ./src:/usr/app/src
+      - ./index.js:/usr/app/index.js
+      - ./web.js:/usr/app/web.js
+      - ./webpack.config.js:/usr/app/webpack.config.js
     ports:
       - 80:80
       - 8080:8080
