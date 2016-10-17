@@ -1,0 +1,11 @@
+version: "2"
+services:
+  web:
+    build: .
+    image: enof/uni-riot
+    volumes:
+      - ./src:/usr/app/src
+    ports:
+      - 80:80
+      - 8080:8080
+    command: npm start
