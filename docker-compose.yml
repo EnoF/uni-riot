@@ -1,14 +1,17 @@
 version: "2"
 services:
   test:
+    tty: true
     build: .
     image: enof/uni-riot
+    volumes:
+      - ./src:/usr/app/src
+      - ./test:/usr/app/test
     command: npm run test-watch
   web:
     extends:
       service: test
     volumes:
-      - ./src:/usr/app/src
       - ./package.json:/usr/app/package.json
       - ./index.js:/usr/app/index.js
       - ./web.js:/usr/app/web.js
