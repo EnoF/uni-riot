@@ -1,7 +1,6 @@
 version: "2"
 services:
   test:
-    tty: true
     build: .
     image: enof/uni-riot
     volumes:
