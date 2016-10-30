@@ -1,4 +1,4 @@
-import { addValueTo, prepareObjectForKey } from '../../src/services/formDataConverter'
+import { addValueTo, prepareObjectForKey, convertFormData } from '../../src/services/formDataConverter'
 import { expect, default as chai } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
@@ -40,6 +40,25 @@ describe('FormData converter', () => {
     })
     it('should have `user.email` with `andyt@live.nl`', () => {
       expect(result.user.email).to.equal('andyt@live.nl')
+    })
+  })
+
+  describe('when converting a FormData to object', () => {
+    let result = null
+    before(() => {
+      result = convertFormData(formData)
+    })
+    it('should have `user.name` with `EnoF`', () => {
+      expect(result.user.name).to.equal('EnoF')
+    })
+    it('should have `user.email` with `andyt@live.nl`', () => {
+      expect(result.user.email).to.equal('andyt@live.nl')
+    })
+    it('should have `user.address.no` with `6`', () => {
+      expect(result.user.address.no).to.equal('6')
+    })
+    it('should have `user.address.street` with `sesamestreet`', () => {
+      expect(result.user.address.street).to.equal('sesamestreet')
     })
   })
 })

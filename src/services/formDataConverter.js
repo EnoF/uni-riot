@@ -1,3 +1,9 @@
+export function convertFormData(formData = new Map()) {
+  const result = {}
+  formData.forEach((value, query) => addValueTo(value, query, result))
+  return result
+}
+
 export function addValueTo(value, query, object) {
   const [lastKey, ...keys] = query.split('.').reverse()
   const parentOfLastKey = keys.reverse()
