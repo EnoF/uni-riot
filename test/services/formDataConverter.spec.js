@@ -27,4 +27,19 @@ describe('FormData converter', () => {
       expect(result.user.name).to.equal('EnoF')
     })
   })
+
+  describe('when `user.name` and `user.email` are added to the same parent object', () => {
+    let result = null
+    before(() => {
+      result = {}
+      addValueTo('EnoF', 'user.name', result)
+      addValueTo('andyt@live.nl', 'user.email', result)
+    })
+    it('should have `user.name` with `EnoF`', () => {
+      expect(result.user.name).to.equal('EnoF')
+    })
+    it('should have `user.email` with `andyt@live.nl`', () => {
+      expect(result.user.email).to.equal('andyt@live.nl')
+    })
+  })
 })
