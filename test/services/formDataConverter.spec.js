@@ -1,4 +1,4 @@
-import { addValueTo } from '../../src/services/formDataConverter'
+import { addValueTo, prepareObjectForKey } from '../../src/services/formDataConverter'
 import { expect, default as chai } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
@@ -28,7 +28,7 @@ describe('FormData converter', () => {
     })
   })
 
-  describe('when a key `user.name` is prepared on an empty object', () => {
+  describe.only('when a key `user.name` is prepared on an empty object', () => {
     let result = null
     before(() => {
       result = {}
