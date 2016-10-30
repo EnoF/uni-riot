@@ -27,18 +27,4 @@ describe('FormData converter', () => {
       expect(result.user.name).to.equal('EnoF')
     })
   })
-
-  describe.only('when a key `user.name` is prepared on an empty object', () => {
-    let result = null
-    before(() => {
-      const keys = 'user.name'.split('.')
-      result = prepareObjectForKey({}, keys)
-    })
-    it('should create an object on the key `user`', () => {
-      expect(result.user).to.be.an('object')
-    })
-    it('should have the `user` object still empty', () => {
-      expect(result.user).to.be.empty
-    })
-  })
 })

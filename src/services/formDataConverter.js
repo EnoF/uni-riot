@@ -1,14 +1,8 @@
-export function addValueTo(value, key, object) {
-
-}
-
-export function prepareObjectForKey(object, keys = []) {
-  const { length } = keys
-  const clone = { ...object }
-  keys.splice(0, length - 1)
-    .reduce((resolvedObject, key) =>
-      getOrCreateAndSet(resolvedObject, key), clone)
-  return clone
+export function addValueTo(value, query, object) {
+  const [lastKey, ...keys] = query.split('.').reverse()
+  const parentOfLastKey = keys.reverse()
+    .reduce((result, key) => getOrCreateAndSet(result, key), object)
+  parentOfLastKey[lastKey] = value
 }
 
 function getOrCreateAndSet(value, key) {
