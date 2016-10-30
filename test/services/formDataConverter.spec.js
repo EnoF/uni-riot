@@ -31,8 +31,8 @@ describe('FormData converter', () => {
   describe.only('when a key `user.name` is prepared on an empty object', () => {
     let result = null
     before(() => {
-      result = {}
-      prepareObjectForKey(result, 'user.name')
+      const keys = 'user.name'.split('.')
+      result = prepareObjectForKey({}, keys)
     })
     it('should create an object on the key `user`', () => {
       expect(result.user).to.be.an('object')
