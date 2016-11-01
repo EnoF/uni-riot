@@ -8,6 +8,7 @@ import user from './services/user'
 import login from './services/login'
 import todo from './services/todo'
 import { resolve } from './services/resolver'
+import { convertFormData } from './services/formDataConverter'
 
 const app = express()
 const jsonParser = bodyParser.json()
@@ -45,7 +46,9 @@ function *startApp() {
   })
 
   app.post('/:collection*?/:details*?/:action*?', (req, res) => {
-    resolve(req.url, req.body).then(state => {
+    const formData = new Map(Object.entries(req.body))
+    const data = convertFormData(formData)
+    resolve(req.url, data).then(state => {
       res.send(renderPage(state, tags))
     }, error => res.status(400).send(error))
   })
