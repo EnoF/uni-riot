@@ -25,6 +25,27 @@ export function createUser(user) {
   })
 }
 
+export function updateUser(user) {
+  return new Promise((resolve, reject) => {
+    const { name, password, address } = user
+    const { street, no } = address
+    const currentUser = users.get(name)
+    if (currentUser.password !== password) reject('incorrect password')
+    const newAddress = { street, no }
+    const updatedUser = { ...currentUser, name, address: newAddress }
+    users.set(name, updatedUser)
+    resolve({
+      page: 'user-created',
+      user: {
+        id: currentUser.id,
+        name,
+        address: newAddress
+      }
+    })
+  })
+}
+
 events.set('create-user', createUser)
+events.set('update-user', updateUser)
 
 registerService('/user', events)

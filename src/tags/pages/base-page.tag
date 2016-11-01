@@ -4,7 +4,7 @@
   <article class="content">
     <login-page show={ route('login') }></login-page>
     <registration-complete-page show={ route('user-created')}
-                                name={ state.user.name }></registration-complete-page>
+                                user={ state.user }></registration-complete-page>
   </article>
 
   <main-menu></main-menu>
