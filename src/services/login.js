@@ -3,10 +3,10 @@ import { registerService } from './resolver'
 const events = new Map()
 
 export function getLoginPage() {
-  const page = 'login'
-  return {
-    page
-  }
+  return new Promise(resolve => {
+    const page = 'login'
+    resolve({ page })
+  })
 }
 
 events.set(undefined, getLoginPage)

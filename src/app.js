@@ -19,6 +19,15 @@ function inject(content) {
   return base.replace('{content}', content.toString())
 }
 
+function renderPage(state, tags) {
+  const tag = riot.render(tags['base-page.tag'], {
+    riot,
+    state
+  })
+  return inject(tag)
+    .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
+}
+
 app.use(jsonParser)
 app.use(formParser)
 app.use(express.static(`${__dirname}/../.tmp`))
@@ -30,25 +39,14 @@ function *startApp() {
   app.get('/favicon.ico', (req, res) => res.send())
 
   app.get('/:page*?/:details*?/:action*?', (req, res) => {
-    const state = resolve(req.url, {})
-    const tag = riot.render(tags['base-page.tag'], {
-      riot,
-      state
+    resolve(req.url, {}).then(state => {
+      res.send(renderPage(state, tags))
     })
-    const html = inject(tag)
-      .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
-    res.send(html)
   })
 
   app.post('/:collection*?/:details*?/:action*?', (req, res) => {
     resolve(req.url, req.body).then(state => {
-      const tag = riot.render(tags['base-page.tag'], {
-        riot,
-        state
-      })
-      const html = inject(tag)
-        .replace('<base-page>', `<base-page state='{ ${JSON.stringify(state)} }'>`)
-      res.send(html)
+      res.send(renderPage(state, tags))
     }, error => res.status(400).send(error))
   })
 

@@ -7,7 +7,6 @@ export function registerService(serviceUrl, events) {
 export function resolve(serviceUrl, formData) {
   const serviceEvents = services.get(serviceUrl)
   const { event } = formData
-  console.log(formData)
   const eventHandler = serviceEvents.get(event)
   return eventHandler(formData)
 }
