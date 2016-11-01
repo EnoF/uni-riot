@@ -1,30 +1,30 @@
-import stateResolver from './state-resolver'
+import { registerService } from './resolver'
 
-const SERVICE_NAME = 'user'
-const EVENT_SAVE = 'save'
+const events = new Map()
 
-class User {
-  constructor() {
-    stateResolver.registerService(SERVICE_NAME, this)
-  }
+// In memory users
+const users = new Map()
 
-  updateState(data, state) {
-    const { event } = data
-    switch (event) {
-      case EVENT_SAVE:
-        return this.saveName(data, state)
-        break;
-      default:
-        return Promise.resolve()
-    }
-  }
+export function createUser(user) {
+  return new Promise((resolve, reject) => {
+    const { name, password, confirmPassword } = user
+    const id = name
+    if (!password) reject('Please enter a password')
+    if (password !== confirmPassword) reject('Password does not match')
+    users.set(name, {
+      id, name, password,
+      createdAt: Date.now()
+    })
 
-  saveName(data, state) {
-    return Promise.resolve({
-      name: data.name
-    }).then(data => state.setState({ name: data.name }))
-      .then(() => state)
-  }
+    resolve({
+      page: 'user-created',
+      user: {
+        id, name
+      }
+    })
+  })
 }
 
-export default new User()
+events.set('create-user', createUser)
+
+registerService('/user', events)

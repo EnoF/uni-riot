@@ -2,31 +2,17 @@
   <h1>{ title }</h1>
 
   <article class="content">
-    <home-page show={ route('home') }
-               state={ state }></home-page>
-    <riot-page show={ route('riot') }
-               state={ state }></riot-page>
-    <todo-page show={ route('todo') }
-               state={ state }></todo-page>
+    <login-page show={ route('login') }></login-page>
+    <registration-complete-page show={ route('user-created')}
+                                name={ state.user.name }></registration-complete-page>
   </article>
 
   <main-menu></main-menu>
   <script type="babel">
-    import { State } from '../../services/state'
+    const { state } = this.opts
 
-    const { riot, state } = this.opts
+    this.state = state
 
-
-    this.title = 'Home'
-    this.state = new State(this.opts.state)
-
-    riot.route.base('/')
-    riot.route('/*', page => {
-      this.state.setState({ page })
-      this.update()
-    })
-    riot.route.start(true)
-
-    this.route = route => this.state.getState().page == route
+    this.route = page => state.page === page
   </script>
 </base-page>
