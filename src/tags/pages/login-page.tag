@@ -25,4 +25,8 @@
 
     <button type="submit">register</button>
   </form>
+
+  <script type="babel">
+    import '../../services/user'
+  </script>
 </login-page>
