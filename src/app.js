@@ -7,7 +7,7 @@ import async from './async'
 import user from './services/user'
 import login from './services/login'
 import todo from './services/todo'
-import { resolve } from './services/resolver'
+import { resolve, isServiceRegistered } from './services/resolver'
 import { convertFormData } from './services/formDataConverter'
 
 const app = express()
@@ -40,7 +40,8 @@ function *startApp() {
   app.get('/favicon.ico', (req, res) => res.send())
 
   app.get('/:page*?/:details*?/:action*?', (req, res) => {
-    resolve(req.url, {}).then(state => {
+    const url = isServiceRegistered(req.url) ? req.url : '/login'
+    resolve(url, {}).then(state => {
       res.send(renderPage(state, tags))
     })
   })

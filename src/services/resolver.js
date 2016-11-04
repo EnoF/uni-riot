@@ -10,3 +10,7 @@ export function resolve(serviceUrl, formData) {
   const eventHandler = serviceEvents.get(event)
   return eventHandler(formData)
 }
+
+export function isServiceRegistered(serviceUrl) {
+  return !!services.get('serviceUrl')
+}
