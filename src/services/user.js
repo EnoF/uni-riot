@@ -1,30 +1,51 @@
-import stateResolver from './state-resolver'
+import { registerService } from './resolver'
 
-const SERVICE_NAME = 'user'
-const EVENT_SAVE = 'save'
+const events = new Map()
 
-class User {
-  constructor() {
-    stateResolver.registerService(SERVICE_NAME, this)
-  }
+// In memory users
+const users = new Map()
 
-  updateState(data, state) {
-    const { event } = data
-    switch (event) {
-      case EVENT_SAVE:
-        return this.saveName(data, state)
-        break;
-      default:
-        return Promise.resolve()
-    }
-  }
+export function createUser(user) {
+  return new Promise((resolve, reject) => {
+    const { name, password, confirmPassword } = user
+    const id = name
+    if (!password) reject('Please enter a password')
+    if (password !== confirmPassword) reject('Password does not match')
+    users.set(name, {
+      id, name, password,
+      createdAt: Date.now()
+    })
 
-  saveName(data, state) {
-    return Promise.resolve({
-      name: data.name
-    }).then(data => state.setState({ name: data.name }))
-      .then(() => state)
-  }
+    resolve({
+      page: 'user-created',
+      user: {
+        id, name
+      }
+    })
+  })
 }
 
-export default new User()
+export function updateUser(user) {
+  return new Promise((resolve, reject) => {
+    const { name, password, address } = user
+    const { street, no } = address
+    const currentUser = users.get(name)
+    if (currentUser.password !== password) reject('incorrect password')
+    const newAddress = { street, no }
+    const updatedUser = { ...currentUser, name, address: newAddress }
+    users.set(name, updatedUser)
+    resolve({
+      page: 'user-created',
+      user: {
+        id: currentUser.id,
+        name,
+        address: newAddress
+      }
+    })
+  })
+}
+
+events.set('create-user', createUser)
+events.set('update-user', updateUser)
+
+registerService('/user', events)

@@ -1,32 +1,31 @@
 <base-page>
   <h1>{ title }</h1>
 
-  <article class="content">
-    <home-page show={ route('home') }
-               state={ state }></home-page>
-    <riot-page show={ route('riot') }
-               state={ state }></riot-page>
-    <todo-page show={ route('todo') }
-               state={ state }></todo-page>
+  <article class="content"
+           onsubmit={ submit }>
+    <login-page show={ route('login') }></login-page>
+    <registration-complete-page show={ route('user-created')}
+                                user={ state.user }></registration-complete-page>
   </article>
 
   <main-menu></main-menu>
   <script type="babel">
-    import { State } from '../../services/state'
+    import { convertFormData } from '../../services/formDataConverter'
+    import { resolve } from '../../services/resolver'
+    const { state } = this.opts
 
-    const { riot, state } = this.opts
+    this.state = state
 
+    this.route = page => this.state.page === page
 
-    this.title = 'Home'
-    this.state = new State(this.opts.state)
-
-    riot.route.base('/')
-    riot.route('/*', page => {
-      this.state.setState({ page })
-      this.update()
-    })
-    riot.route.start(true)
-
-    this.route = route => this.state.getState().page == route
+    this.submit = event => {
+      const { target } = event
+      const formData = new FormData(target)
+      resolve(target.getAttribute('action'), convertFormData(formData))
+        .then(state => {
+          this.state = state
+          this.update()
+        })
+    }
   </script>
 </base-page>

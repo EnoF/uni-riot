@@ -7,7 +7,8 @@
     "start": "npm-run-all --parallel start-server start-web-dev",
     "start-server": "nodemon index.js",
     "start-web-dev": "webpack-dev-server --inline --hot --host 0.0.0.0",
-    "test": "echo \"Error: no test specified\" && exit 2",
+    "test": "mocha test/**/*.js --compilers js:babel-core/register",
+    "test-watch": "mocha -w test/**/*.js --compilers js:babel-core/register",
     "webpack": "webpack"
   },
   "keywords": [
@@ -33,10 +34,14 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-es2015-riot": "^1.1.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.0",
     "nodemon": "^1.9.2",
     "npm-run-all": "^2.2.0",
     "parallelshell": "^2.0.0",
     "riotjs-loader": "^3.0.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }
