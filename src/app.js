@@ -1,5 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import RestIO from 'rest-io'
+import mongoose from 'mongoose';
 import riot from 'riot'
 import fs from 'fs'
 import tagLoader from './tag-loader'
@@ -39,6 +41,10 @@ function *startApp() {
 
   app.get('/favicon.ico', (req, res) => res.send())
 
+  new RestIO(app, {
+    resources: __dirname + '/resources'
+  });
+
   app.get('/:page*?/:details*?/:action*?', (req, res) => {
     const url = isServiceRegistered(req.url) ? req.url : '/login'
     resolve(url, {}).then(state => {
@@ -54,7 +60,10 @@ function *startApp() {
     }, error => res.status(400).send(error))
   })
 
+  mongoose.connect('mongodb://mongo:27017/test');
+
   app.listen(PORT, () => console.log(`Server has started under port: ${PORT}`))
 }
+
 
 async(startApp())

@@ -20,6 +20,7 @@
   "author": "Andy Tang <andyt@live.nl>",
   "license": "ISC",
   "dependencies": {
+    "auto-loader": "^0.2.0",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
@@ -27,6 +28,8 @@
     "babel-register": "^6.9.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "mongoose": "^4.6.6",
+    "rest-io": "^5.0.0",
     "riot": "^2.4.1"
   },
   "devDependencies": {
