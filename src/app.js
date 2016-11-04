@@ -36,6 +36,10 @@ app.use(formParser)
 app.use(express.static(`${__dirname}/../.tmp`))
 app.use(express.static(`${__dirname}/../node_modules/riot`))
 
+// DEMO purpose only
+process.env.REST_IO_HMAC_KEY = process.env.REST_IO_HMAC_KEY || 'hmac key which set via js to demo';
+process.env.REST_IO_AES_KEY = process.env.REST_IO_AES_KEY || 'aes key which is set via js to demo';
+
 function *startApp() {
   const tags = yield tagLoader(`${__dirname}/tags`)
 

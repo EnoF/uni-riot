@@ -28,6 +28,7 @@
     "babel-register": "^6.9.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "isomorphic-fetch": "^2.1.1",
     "mongoose": "^4.6.6",
     "rest-io": "^5.0.0",
     "riot": "^2.4.1"

@@ -30,6 +30,6 @@
   <script type="babel">
     const { user } = this.opts
 
-    this.user = user
+    this.on('update', () => this.user = this.opts.user)
   </script>
 </registration-complete-page>

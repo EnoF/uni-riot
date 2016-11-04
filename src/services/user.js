@@ -1,4 +1,5 @@
 import { registerService } from './resolver'
+import 'isomorphic-fetch'
 
 const events = new Map()
 
@@ -6,23 +7,24 @@ const events = new Map()
 const users = new Map()
 
 export function createUser(user) {
-  return new Promise((resolve, reject) => {
-    const { name, password, confirmPassword } = user
-    const id = name
-    if (!password) reject('Please enter a password')
-    if (password !== confirmPassword) reject('Password does not match')
-    users.set(name, {
-      id, name, password,
-      createdAt: Date.now()
+  const { name, password, confirmPassword } = user
+  if (!password) return Promise.reject('Please enter a password')
+  if (password !== confirmPassword) return Promise.reject('Password does not match')
+  return fetch('http://localhost/api/users', {
+    method: 'POST',
+    body: JSON.stringify({
+      userName: name,
+      password
     })
-
-    resolve({
+  }).then(usr => {
+    const { id } = usr
+    return {
       page: 'user-created',
       user: {
         id, name
       }
-    })
-  })
+    }
+  }, res => console.log('error', res))
 }
 
 export function updateUser(user) {
