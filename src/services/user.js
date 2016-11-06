@@ -1,10 +1,8 @@
 import { registerService } from './resolver'
+import async from '../async'
 import 'isomorphic-fetch'
 
 const events = new Map()
-
-// In memory users
-const users = new Map()
 
 export function createUser(user) {
   const { name, password, confirmPassword } = user
@@ -32,22 +30,28 @@ export function createUser(user) {
 }
 
 export function updateUser(user) {
-  return new Promise((resolve, reject) => {
-    const { name, password, address } = user
-    const { street, no } = address
-    const currentUser = users.get(name)
-    if (currentUser.password !== password) reject('incorrect password')
-    const newAddress = { street, no }
-    const updatedUser = { ...currentUser, name, address: newAddress }
-    users.set(name, updatedUser)
-    resolve({
-      page: 'user-created',
-      user: {
-        id: currentUser.id,
-        name,
-        address: newAddress
-      }
+  const { id, name, address, authToken } = user
+  const { street, no } = address
+  const newAddress = { street, no }
+  const page = 'update-user'
+
+  return fetch(`http://localhost/api/users/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': authToken,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userName: name,
+      address: newAddress
     })
+  }).then(response => {
+    return response.json()
+  }).then(user => {
+    const { _id, userName, address } = user
+    return { page, message: 'update success!', authToken,
+      user: { id: _id, userName, address } }
   })
 }
 

@@ -1,4 +1,5 @@
 <update-user>
+  <p>{ opts.message }</p>
   <form method="POST" action="/user">
     <input type="hidden"
            name="event"
@@ -6,6 +7,9 @@
     <input type="hidden"
            name="authToken"
            value="{ opts.authToken }">
+    <input type="hidden"
+           name="id"
+           value="{ opts.user.id }">
 
     <label for="update-user-street">
       street:
