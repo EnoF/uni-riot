@@ -3,7 +3,8 @@
 
   <article class="content"
            onsubmit={ submit }>
-    <login-page show={ route('login') }></login-page>
+    <login-page show={ route('login') }
+                error={ state.error }></login-page>
     <registration-complete-page show={ route('user-created')}
                                 user={ state.user }></registration-complete-page>
   </article>

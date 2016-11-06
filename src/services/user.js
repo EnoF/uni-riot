@@ -12,6 +12,10 @@ export function createUser(user) {
   if (password !== confirmPassword) return Promise.reject('Password does not match')
   return fetch('http://localhost/api/users', {
     method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({
       userName: name,
       password
