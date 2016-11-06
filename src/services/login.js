@@ -20,10 +20,17 @@ export function login(credentials) {
     },
     body: JSON.stringify({ userName, password })
   }).then(response => {
-    const { status, body } = response
+    const { status } = response
     if (status >= 400) return { page: 'login', error: 'Could not login!' }
-    const { userName, id } = body
-    return { page: 'update-user', userName, id }
+    return response.json()
+  }).then(body => {
+    const { user, authToken } = body
+    const { userName, _id } = user
+    return {
+      page: 'update-user',
+      user: { userName, id: _id },
+      authToken
+    }
   })
 }
 

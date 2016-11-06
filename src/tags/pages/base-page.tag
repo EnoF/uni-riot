@@ -3,9 +3,13 @@
 
   <article class="content"
            onsubmit={ submit }>
-    <login-page show={ route('login') }
+    <login-page if={ route('login') }
                 error={ state.error }></login-page>
-    <registration-complete-page show={ route('user-created')}
+    <update-user-page if={ route('update-user')}
+                      auth-token={ state.authToken }
+                      user={ state.user }></update-user-page>
+    <registration-complete-page if={ route('user-created')}
+                                authToken={ state.authToken }
                                 user={ state.user }></registration-complete-page>
   </article>
 
