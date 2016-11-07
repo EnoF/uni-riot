@@ -3,8 +3,15 @@
 
   <article class="content"
            onsubmit={ submit }>
-    <login-page show={ route('login') }></login-page>
-    <registration-complete-page show={ route('user-created')}
+    <login-page if={ route('login') }
+                error={ state.error }></login-page>
+    <update-user-page if={ route('update-user')}
+                      message={ state.message }
+                      auth-token={ state.authToken }
+                      user={ state.user }></update-user-page>
+    <registration-complete-page if={ route('user-created')}
+                                message={ state.message }
+                                authToken={ state.authToken }
                                 user={ state.user }></registration-complete-page>
   </article>
 

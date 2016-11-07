@@ -10,6 +10,8 @@ services:
   web:
     extends:
       service: test
+    links:
+      - mongo
     volumes:
       - ./package.json:/usr/app/package.json
       - ./index.js:/usr/app/index.js
@@ -18,4 +20,7 @@ services:
     ports:
       - 80:80
       - 8080:8080
+      - 9229:9229
     command: npm start
+  mongo:
+    image: mongo

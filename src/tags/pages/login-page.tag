@@ -1,5 +1,24 @@
 <login-page>
+  <p>{ opts.error }</p>
+  <form action="/login" method="post">
+    <h3>Login</h3>
+    <input type="hidden" name="event" value="login">
+    <label for="login-user-name">
+      user name:
+    </label>
+    <input id="login-user-name"
+           type="text"
+           name="userName">
+    <label for="login-user-password">
+      password:
+    </label>
+    <input type="password"
+           id="login-user-password"
+           name="password">
+    <button type="submit">login</button>
+  </form>
   <form action="/user" method="POST">
+    <h3>No user yet? Create one now</h3>
     <input type="hidden"
            name="event"
            value="create-user">
@@ -17,7 +36,7 @@
            id="register-user-password"
            name="password">
     <label for="register-user-confirm-password">
-      conform password:
+      confirm password:
     </label>
     <input type="password"
            id="register-user-confirm-password"
@@ -27,6 +46,7 @@
   </form>
 
   <script type="babel">
+    import '../../services/login'
     import '../../services/user'
   </script>
 </login-page>

@@ -1,47 +1,55 @@
 import { registerService } from './resolver'
+import async from '../async'
+import 'isomorphic-fetch'
 
 const events = new Map()
 
-// In memory users
-const users = new Map()
-
 export function createUser(user) {
-  return new Promise((resolve, reject) => {
-    const { name, password, confirmPassword } = user
-    const id = name
-    if (!password) reject('Please enter a password')
-    if (password !== confirmPassword) reject('Password does not match')
-    users.set(name, {
-      id, name, password,
-      createdAt: Date.now()
+  const { name, password, confirmPassword } = user
+  if (!password) return Promise.reject('Please enter a password')
+  if (password !== confirmPassword) return Promise.reject('Password does not match')
+  return fetch('http://localhost/api/users', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userName: name,
+      password
     })
-
-    resolve({
+  }).then(usr => {
+    const { id, userName, address } = usr
+    return {
       page: 'user-created',
-      user: {
-        id, name
-      }
-    })
-  })
+      user: { id, userName, address }
+    }
+  }, res => console.log('error', res))
 }
 
 export function updateUser(user) {
-  return new Promise((resolve, reject) => {
-    const { name, password, address } = user
-    const { street, no } = address
-    const currentUser = users.get(name)
-    if (currentUser.password !== password) reject('incorrect password')
-    const newAddress = { street, no }
-    const updatedUser = { ...currentUser, name, address: newAddress }
-    users.set(name, updatedUser)
-    resolve({
-      page: 'user-created',
-      user: {
-        id: currentUser.id,
-        name,
-        address: newAddress
-      }
+  const { id, name, address, authToken } = user
+  const { street, no } = address
+  const newAddress = { street, no }
+  const page = 'update-user'
+
+  return fetch(`http://localhost/api/users/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': authToken,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userName: name,
+      address: newAddress
     })
+  }).then(response => {
+    return response.json()
+  }).then(user => {
+    const { _id, userName, address } = user
+    return { page, message: 'update success!', authToken,
+      user: { id: _id, userName, address } }
   })
 }
 
