@@ -18,6 +18,13 @@
            id="update-user-street"
            value="{ user.address.street }"
            name="address.street">
+    <label for="update-user-no">
+      no:
+    </label>
+    <input type="text"
+           id="update-user-no"
+           value="{ user.address.no }"
+           name="address.no">
     <button type="submit">update</button>
   </form>
 

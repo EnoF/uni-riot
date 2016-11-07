@@ -25,10 +25,10 @@ export function login(credentials) {
     return response.json()
   }).then(body => {
     const { user, authToken } = body
-    const { userName, _id } = user
+    const { userName, _id, address } = user
     return {
       page: 'update-user',
-      user: { userName, id: _id },
+      user: { userName, id: _id, address },
       authToken
     }
   })

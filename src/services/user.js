@@ -19,12 +19,10 @@ export function createUser(user) {
       password
     })
   }).then(usr => {
-    const { id } = usr
+    const { id, userName, address } = usr
     return {
       page: 'user-created',
-      user: {
-        id, name
-      }
+      user: { id, userName, address }
     }
   }, res => console.log('error', res))
 }
