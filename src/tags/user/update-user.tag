@@ -11,13 +11,15 @@
            name="id"
            value="{ opts.user.id }">
 
-    <label for="update-user-street">
-      street:
-    </label>
-    <input type="text"
-           id="update-user-street"
-           value="{ user.address.street }"
-           name="address.street">
+    <div class="input-field">
+      <label for="update-user-street">
+        street:
+      </label>
+      <input type="text"
+             id="update-user-street"
+             value="{ user.address.street }"
+             name="address.street">
+    </div>
     <label for="update-user-no">
       no:
     </label>

@@ -3,19 +3,24 @@
   <form action="/login" method="post">
     <h3>Login</h3>
     <input type="hidden" name="event" value="login">
-    <label for="login-user-name">
-      user name:
-    </label>
-    <input id="login-user-name"
-           type="text"
-           name="userName">
-    <label for="login-user-password">
-      password:
-    </label>
-    <input type="password"
-           id="login-user-password"
-           name="password">
-    <button type="submit">login</button>
+    <div class="input-field">
+      <label for="login-user-name">
+        user name:
+      </label>
+      <input id="login-user-name"
+             type="text"
+             name="userName">
+    </div>
+    <div class="input-field">
+      <label for="login-user-password">
+        password:
+      </label>
+      <input type="password"
+             id="login-user-password"
+             name="password">
+    </div>
+    <button class="btn"
+            type="submit">login</button>
   </form>
   <form action="/user" method="POST">
     <h3>No user yet? Create one now</h3>
