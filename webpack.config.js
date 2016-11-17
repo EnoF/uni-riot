@@ -6,9 +6,6 @@ module.exports = {
     path: __dirname + '/.tmp',
     filename: 'bundle.js',
   },
-  // externals: {
-  //   riot: 'riot'
-  // },
   plugins: [
     new webpack.ProvidePlugin({
       riot: 'riot',
@@ -22,10 +19,16 @@ module.exports = {
         loader: 'riotjs-loader',
         query: {
           type: 'babel',
+          presets: ['es2015']
         },
       },
     ],
     loaders: [
+      { test: /\.scss$/, loader: 'style!css!sass' },
+      {
+        test: /\.(eot|ttf|woff|woff2)/,
+        loader: 'file?name=./fonts/roboto/[name].[ext]'
+      },
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -35,6 +38,9 @@ module.exports = {
         }
       }
     ]
+  },
+  sassLoader: {
+    data: '$roboto-font-path: "~materialize-css/fonts/roboto/";'
   },
   devtool: 'source-map',
   devServer: {

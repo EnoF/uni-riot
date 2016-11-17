@@ -1,7 +1,9 @@
 <base-page>
+  <main-menu></main-menu>
+  
   <h1>{ title }</h1>
 
-  <article class="content"
+  <article class="container"
            onsubmit={ submit }>
     <login-page if={ route('login') }
                 error={ state.error }></login-page>
@@ -15,7 +17,6 @@
                                 user={ state.user }></registration-complete-page>
   </article>
 
-  <main-menu></main-menu>
   <script type="babel">
     import { convertFormData } from '../../services/formDataConverter'
     import { resolve } from '../../services/resolver'

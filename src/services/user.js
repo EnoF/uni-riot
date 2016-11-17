@@ -5,7 +5,7 @@ import 'isomorphic-fetch'
 const events = new Map()
 
 export function createUser(user) {
-  const { name, password, confirmPassword } = user
+  const { userName, password, confirmPassword } = user
   if (!password) return Promise.reject('Please enter a password')
   if (password !== confirmPassword) return Promise.reject('Password does not match')
   return fetch('http://localhost/api/users', {
@@ -15,7 +15,7 @@ export function createUser(user) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      userName: name,
+      userName,
       password
     })
   }).then(usr => {
@@ -28,7 +28,7 @@ export function createUser(user) {
 }
 
 export function updateUser(user) {
-  const { id, name, address, authToken } = user
+  const { id, userName, address, authToken } = user
   const { street, no } = address
   const newAddress = { street, no }
   const page = 'update-user'
@@ -41,7 +41,7 @@ export function updateUser(user) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      userName: name,
+      userName,
       address: newAddress
     })
   }).then(response => {
