@@ -11,23 +11,13 @@
            name="id"
            value="{ opts.user.id }">
 
-    <div class="input-field">
-      <label for="update-user-street">
-        street:
-      </label>
-      <input type="text"
-             id="update-user-street"
-             value="{ user.address.street }"
-             name="address.street">
+    <div class="row">
+      <input-field class-name="col s12" id="update-address-street" type="text" name="address.street">street:</input-field>
     </div>
-    <label for="update-user-no">
-      no:
-    </label>
-    <input type="text"
-           id="update-user-no"
-           value="{ user.address.no }"
-           name="address.no">
-    <button type="submit">update</button>
+    <div class="row">
+      <input-field class-name="col s12" id="update-address-no" type="text" name="address.no">no:</input-field>
+    </div>
+    <button class="btn" type="submit">update</button>
   </form>
 
   <script type="babel">

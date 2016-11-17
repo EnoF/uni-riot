@@ -9,11 +9,11 @@
 
   <script type="babel">
     this.links = [{
-      url: '/home',
-      label: 'home'
+      url: '/login',
+      label: 'login'
     }, {
-      url: '/riot',
-      label: 'riot'
+      url: '/user',
+      label: 'user'
     }, {
       url: '/todo',
       label: 'todo'
