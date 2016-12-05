@@ -1,7 +1,11 @@
 version: "2"
 services:
   test:
-    build: .
+    build:
+      context: .
+      args:
+        proxy: ${http_proxy}
+        noproxy: ${no_proxy}
     image: enof/uni-riot
     volumes:
       - ./src:/usr/app/src
