@@ -20,6 +20,7 @@
   "author": "Andy Tang <andyt@live.nl>",
   "license": "ISC",
   "dependencies": {
+    "auto-loader": "^0.2.0",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
