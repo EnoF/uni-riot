@@ -1,6 +1,6 @@
 <base-page>
   <main-menu></main-menu>
-  
+
   <h1>{ title }</h1>
 
   <article class="container"
@@ -18,8 +18,8 @@
   </article>
 
   <script type="babel">
-    import { convertFormData } from '../../services/formDataConverter'
-    import { resolve } from '../../services/resolver'
+    import { convertFormData } from '../../formDataConverter'
+    import { resolve } from '../../resolver'
     const { state } = this.opts
 
     this.state = state

@@ -1,4 +1,4 @@
-import { registerService } from './resolver'
+import { registerService } from '../resolver'
 import async from '../async'
 import 'isomorphic-fetch'
 

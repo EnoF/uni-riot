@@ -1,4 +1,4 @@
-import { addValueTo, prepareObjectForKey, convertFormData } from '../../src/services/formDataConverter'
+import { addValueTo, prepareObjectForKey, convertFormData } from '../../src/formDataConverter'
 import { expect, default as chai } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'

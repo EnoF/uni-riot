@@ -1,4 +1,4 @@
-import { resolve, registerService } from '../../src/services/resolver'
+import { resolve, registerService } from '../../src/resolver'
 import { expect, default as chai } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'

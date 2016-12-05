@@ -2,8 +2,8 @@ import * as riot from 'riot'
 import async from './async'
 import tagLoader from './tag-loader'
 import fs from 'fs'
-import { resolve, isServiceRegistered } from './services/resolver'
-import { convertFormData } from './services/formDataConverter'
+import { resolve, isServiceRegistered } from './resolver'
+import { convertFormData } from './formDataConverter'
 
 function inject(content) {
   const base = fs.readFileSync(`${__dirname}/index.html`, 'utf8')
