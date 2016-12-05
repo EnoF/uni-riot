@@ -7,7 +7,7 @@ import async from './async'
 import user from './services/user'
 import login from './services/login'
 import todo from './services/todo'
-import { register } from './page-routes'
+import { register } from './uni-riot'
 
 const app = express()
 const jsonParser = bodyParser.json()
