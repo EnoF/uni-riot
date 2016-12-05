@@ -1,5 +1,12 @@
 FROM node:6.8.0
 
+ARG proxy
+ARG noproxy
+
+ENV no_proxy=${noproxy}
+ENV http_proxy=${proxy}
+ENV https_proxy=${proxy}
+
 RUN npm -g install yarn
 
 RUN mkdir -p /usr/app
