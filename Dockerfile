@@ -19,3 +19,4 @@ COPY ./.babelrc /usr/app/.babelrc
 COPY ./web.js /usr/app/web.js
 COPY ./webpack.config.js /usr/app/webpack.config.js
 COPY ./src /usr/app/src
+COPY ./dist /usr/app/dist

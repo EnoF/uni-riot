@@ -9,18 +9,19 @@ services:
     image: enof/uni-riot
     volumes:
       - ./src:/usr/app/src
+      - ./dist:/usr/app/dist
+      - .:/usr/app/node_modules/uni-riot
       - ./test:/usr/app/test
     command: npm run test-watch
+  babel:
+    extends:
+      service: test
+    command: npm run babel
   web:
     extends:
       service: test
     links:
       - mongo
-    volumes:
-      - ./package.json:/usr/app/package.json
-      - ./index.js:/usr/app/index.js
-      - ./web.js:/usr/app/web.js
-      - ./webpack.config.js:/usr/app/webpack.config.js
     ports:
       - 80:80
       - 8080:8080

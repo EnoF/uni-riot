@@ -1,7 +1,9 @@
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './web',
+  entry: {
+    web: './web',
+  },
   output: {
     path: __dirname + '/.tmp',
     filename: 'bundle.js',
@@ -31,7 +33,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel',
         query: {
           presets: ['es2015']

@@ -1,4 +1,4 @@
-import { registerService } from './resolver'
+import { registerService } from '../resolver'
 import 'isomorphic-fetch'
 
 const events = new Map()

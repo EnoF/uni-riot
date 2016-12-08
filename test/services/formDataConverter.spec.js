@@ -1,4 +1,6 @@
-import { addValueTo, prepareObjectForKey, convertFormData } from '../../src/services/formDataConverter'
+import 'babel-polyfill'
+
+import { addValueTo, convertFormData } from 'uni-riot'
 import { expect, default as chai } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
