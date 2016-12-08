@@ -1,4 +1,6 @@
-import { resolve, registerService } from '../../src/resolver'
+import 'babel-polyfill'
+
+import { resolve, registerService } from 'uni-riot'
 import { expect, default as chai } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
